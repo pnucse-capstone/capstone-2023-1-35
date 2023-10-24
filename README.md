@@ -32,7 +32,7 @@
 |이름|이메일|역할|
 |:-----:|:-----:|:-----|
 |[<img src="https://github.com/zigimi.png" width="150">](https://github.com/zigimi)<br>**[팀장]** 천주희|chju0905@pusan.ac.kr|-   위치 추정 기술, 무선 네트워크 기술 학습 및 개발<br>- YOLOv5를 통한 사람 인식 딥러닝 기술 학습<br>- 다수의 라즈베리파이를 이용한 실시간 위치 추정 기술 개발<br>- 영상 스트리밍 서버 및 웹 서버 기능 구현<br>- 카메라를 이용한 정밀 위치 추정 기술 개발<br>- 서버 간 통신 구현<br>- 서버 배포|
-|[<img src="https://github.com/dmstj920.png" width="150">](https://github.com/dmstj920)<br>**[팀원]** 장은서|merry0920@pusan.ac.kr|-   위치 추정 기술, 무선 네트워크 기술 학습 및 개발<br>- YOLOv5를 통한 사람 인식 딥러닝 기술 학습<br>- 웹 UI 화면 구성<br>- 웹 UI 디자인<br>- 반응형 웹 제작<br>- 인원수 및 밀집도 예측 모델 개발
+|[<img src="https://github.com/dmstj920.png" width="150">](https://github.com/dmstj920)<br>**[팀원]** 장은서|merry0920@pusan.ac.kr|-   위치 추정 기술, 무선 네트워크 기술 학습 및 개발<br>- YOLOv5를 통한 사람 인식 딥러닝 기술 학습<br>- 웹 UI 화면 구성<br>- 웹 UI 디자인<br>- 반응형 웹 제작<br>- 인원수 및 밀집도 예측 모델 개발|
 <br>
 
 ## 3.구성도
