@@ -90,3 +90,138 @@
 
 
 ## 5. 사용법
+
+**[소프트웨어 요구사항]**
+
+- **localization-fingerprint-master**
+	
+	- Python 3.7 이상	
+
+<br>
+
+- **yolov5-master**
+
+	- Python 3.11 이상
+	
+	- YOLOv5에서 기본적으로 요구하는 패키지 목록과 버전
+
+			gitpython>=3.1.30
+			matplotlib>=3.3
+			numpy>=1.22.2
+			opencv-python>=4.1.1
+			Pillow>=7.1.2
+			psutil
+			PyYAML>=5.3.1
+			requests>=2.23.0
+			scipy>=1.4.1
+			thop>=0.1.1 
+			torch>=1.8.0 
+			torchvision>=0.9.0
+			tqdm>=4.64.0
+			ultralytics>=8.0.147
+			pandas>=1.1.4
+			seaborn>=0.11.0
+			setuptools>=65.5.1
+
+		설치방법: 
+		```bash
+		cd yolov5-master
+		// yolov5-master로 이동
+
+		pip install -r requirements.txt
+		// 요구사항 다운로드
+		```
+
+<br>
+
+- **density_check_web_service**
+	
+	- Spring Boot 2.7.11 
+	
+	- JDK 11 
+
+<br>
+
+**[사용법]**
+
+- **웹서비스만 확인할 경우**
+
+	1. density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
+
+	2. http://localhost:8080으로 접속합니다.
+
+	<br>
+
+	(혹은 http://ec2-43-202-149-63.ap-northeast-2.compute.amazonaws.com:8080/ 에 접속하시면 테스트 데이터로 동작하는 모습을 확인할 수 있습니다.)
+
+<br>
+
+- **전체 확인**
+
+	<U>density_check_web_service의 실행이 yolov5-master와 localization-fingerprint-master보다 선행되어야 합니다.</U>
+
+	- density_check_web_service
+
+		1. density_check_web_service\src\main\resources\static\camera-location.html의 539번째 Line의 arr변수에 yolov5-master 프로젝트를 실행하는 환경의 IP주소 + :5000을 카메라 위치와 번호에 맞게 배열에 입력합니다.
+	
+		2. 프로젝트를 실행합니다.
+		
+		3. 실행 후 로그인 -> 관리자 페이지 -> 회원 관리 페이지(/user_management)에 접속하여 현재 소지한 라즈베리파이(3.의 클라이언트) MAC 주소를 찾아 로그인한 아이디를 등록합니다.
+
+	- yolov5-master 
+
+		1. 카메라 모듈이 있는 환경에서 실행합니다.
+
+		2. detect.py의 215번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/cameraLocation으로 수정합니다.
+	
+		3. detect.py의 217번째 Line의 ip 변수의 값을 카메라 번호에 맞게 수정합니다.
+		
+		4. detect.py의 204번째 Line의 center 변수와 311번째 Line의 source_coord 변수에 카메라 설치 위치에 맞는 좌표를 입력합니다.
+		
+		5. detect.py를 실행합니다.
+		
+		6. app.py를 실행합니다.
+
+	- localization-fingerprint-master
+
+		1. 공통 설정 : common.py 파일을 열어서 서버 ip, 서버 port 번호, 폴더 등등을 설정합니다.
+  	
+		2. 클라이언트 : rpi 폴더에서 measure-1 폴더 내부의 모든 파일을 삭제하고, measure-realtime-1 폴더 내부의 모든 파일을 삭제합니다.
+  		
+		3. 서버 : server 폴더에서 measure-1 폴더 내부의 모든 파일을 삭제하고, measure-outcome-1 폴더 내부의 모든 파일을 삭제합니다.
+		
+		4. 서버: server 폴더에서 2-server-main.py의 144번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/sendLocations로 수정합니다.
+
+		5. 클라이언트(RPi) : 1-client-setup.py x y n 을 각 cell-block에서 실행합니다.
+  		
+				- (x,y) cell-block의 인덱스 (물리적인 실제 좌표 아님)
+				- n = 동일한 cell-block에서 몇번 반복해서 측정을 할지 (기본값 = 5)
+				- measure-1 이라는 폴더가 생성되어 있어야 하고, 폴더안에는 아무런 파일이 없어야 함
+				- 프로그램 구동 후, measure-1 폴더 내에 많은 파일이 생성되어 있음
+
+		6. 서버 : 1-receive-setup.py를 실행합니다.
+
+				- RPi 클라이언트가 보내주는 radio measurement 파일을 수신하는 코드
+				- USE_INTERNET_CONN=True 이면 실제로 클라이언트로부터 전송받은 데이터로 radio map 만들고 False 이면, 서버 로컬에 저장된 데이터를 이용해서 radio map 만듦
+				- 서버쪽에는 measure-outcome-1 이라는 폴더가 만들어져 있어야 함
+
+		7. 클라이언트(rpi) : 2-upload-setup.py를 실행합니다.
+
+				- 서버쪽 1-receive-setup.py가 먼저 구동하고 있는 상태에서 구동해야 함
+				- 클라이언트의 measure-1 폴더 내의 파일을 서버에게 전달 해 주는 코드
+
+		8. 서버 : 2-server-main.py의 146번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/sendLocations로 수정합니다.
+		
+		9. 서버: 2-server-main.py를 실행합니다.
+
+  				- 실시간 위치 추적 결과를 (y,x) 형태로 출력함
+
+		10. 클라이언트(rpi) : 3-client-main.py 실행합니다.
+  			
+				- 서버 2-server-main.py를 먼저 실행하고, 다음으로 이 코드를 실행
+				- 실시간으로 rss 값을 측정하고, 그 결과를 서버 2-server-main.py로 보내줌
+
+		11. 클라이언트의 위치를 서버가 실시간으로 추정하여 그 결과를 웹 서버로 전송합니다.
+
+		<br>
+		(만약 6공학관 2층에서 사용한다면 8번부터 실행해도 정상적으로 동작합니다.)
