@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+
+    <link rel="icon" href="img/favicon.png">
+    <title>제보하기</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;700&family=Orbit&display=swap');
+        body{
+            font-family: 'NanumSquareNeoExtraBold'
+        }
+        img{
+            width:100%;
+        }
+        table th{
+            background-color: #858796;
+            color: #FFF;
+            text-align:center;
+            width:20%;
+        }
+        #building-text{
+            font-size:4.5vw;
+        }
+        #message{
+            font-size:3.8vw;
+        }
+        .table{
+            font-size:3vw;
+        }
+        ::placeholder {
+            font-size: 2.8vw;
+        }
+        #title, #report-content, #location{
+            font-size: 3vw;
+        }
+        #location-button button, #submit{
+            font-size:2.5vw;
+        }
+        #selector{
+            font-size:2.8vw;
+        }
+        @media screen and (min-width:500px){
+            .table{
+                font-size:2.8vw;
+            }
+            ::placeholder {
+                font-size:2.5vw;
+            }
+            #location-button button, #submit{
+                font-size:2.3vw;
+            }
+            #title, #report-content, #location{
+                font-size: 2.5vw;
+            }
+        }
+        @media screen and (min-width:576px){
+            #building-text{
+                font-size:4vw;
+            }
+            #message{
+                font-size:3vw;
+            }
+            .table{
+                font-size:2.5vw;
+            }
+            ::placeholder {
+                font-size:2.3vw;
+            }
+            #location-button button, #submit{
+                font-size:2.1vw;
+            }
+            #title, #report-content, #location{
+                font-size: 2.3vw;
+            }
+            #selector{
+                font-size:2.8vw;
+            }
+
+        }
+        @media screen and (min-width:700px){
+            #building-text{
+                font-size:4vw;
+            }
+            #message{
+                font-size:3vw;
+            }
+            .table{
+                font-size:2.3vw;
+            }
+            ::placeholder {
+                font-size:2.2vw;
+            }
+            #location-button button, #submit{
+                font-size:2vw;
+            }
+            #title, #report-content, #location{
+                font-size: 2.2vw;
+            }
+            #selector{
+                font-size:3vw;
+            }
+
+        }
+        @media screen and (min-width:768px){
+            #building-text{
+                font-size:3vw;
+            }
+            #message{
+                font-size:2.3vw;
+            }
+            .table{
+                font-size:1.8vw;
+            }
+            ::placeholder {
+                font-size:1.7vw;
+            }
+            #location-button button, #submit{
+                font-size:1.5vw;
+            }
+            #title, #report-content, #location{
+                font-size: 1.7vw;
+            }
+            #selector{
+                font-size:2vw;
+            }
+        }
+        @media screen and (min-width:992px){
+            #message{
+                font-size:2vw;
+            }
+            .table{
+                font-size:1.5vw;
+            }
+            ::placeholder {
+                font-size: 1.4vw;
+            }
+            #location-button button, #submit{
+                font-size:1.3vw;
+            }
+            #title, #report-content, #location{
+                font-size: 1.4vw;
+            }
+        }
+        @media screen and (min-width:1200px){
+            #building-text{
+                font-size:2.8vw;
+            }
+            #message{
+                font-size:1.7vw;
+            }
+            .table{
+                font-size:1.4vw;
+            }
+            ::placeholder {
+                font-size: 1.3vw;
+            }
+            #location-button button, #submit{
+                font-size:1.2vw;
+            }
+            #title, #report-content, #location{
+                font-size: 1.3vw;
+            }
+        }
+
+        @media screen and (min-width:1800px){
+            #building-text{
+                font-size:2.5vw;
+            }
+        }
+
+        #location-button{
+            position: relative;
+        }
+
+        #location-button button{
+            position:absolute;
+            top: 0;
+            bottom: 0;
+            right: 15px;
+            margin: auto 0;
+            width: 30%;
+            height: 80%;
+        }
+
+        .position{
+            font-size:2vw;
+        }
+
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+
+        <!--  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="font-family: 'NanumSquareNeo';background-color:#1f2c54">-->
+
+        <!--    &lt;!&ndash; Sidebar - Brand &ndash;&gt;-->
+        <!--    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">-->
+        <!--      <div>MENU</div>-->
+        <!--    </a>-->
+
+        <!--    &lt;!&ndash; Divider &ndash;&gt;-->
+        <!--    <hr class="sidebar-divider my-0">-->
+
+        <!--    &lt;!&ndash; Nav Item - Dashboard &ndash;&gt;-->
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/current-location.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>현재 위치에서의 밀집도</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/density-check.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>실시간 밀집도 및 통계 확인</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/building.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>건물 정보 및 대피로</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/camera-location.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>카메라</span></a>-->
+        <!--    </li>-->
+
+        <!--    &lt;!&ndash; Divider &ndash;&gt;-->
+        <!--    <hr class="sidebar-divider my-0">-->
+
+        <!--    &lt;!&ndash; Nav Item - Pages Collapse Menu &ndash;&gt;-->
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/report.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>제보하기</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/report-board.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>제보 게시판</span></a>-->
+        <!--    </li>-->
+
+        <!--    &lt;!&ndash; Divider &ndash;&gt;-->
+        <!--    <hr class="sidebar-divider">-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/neighbor.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>이웃</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/user-find.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>사용자 찾기</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link" href="/specific-area-user-find.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>특정 구역 사용자 찾기</span></a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item" sec:authorize="isAuthenticated()">-->
+        <!--      <a class="nav-link" href="/user-management.html">-->
+        <!--        <i class="bi bi-caret-right"></i>-->
+        <!--        <span>회원 관리</span></a>-->
+        <!--    </li>-->
+
+        <!--    &lt;!&ndash; Divider &ndash;&gt;-->
+        <!--    <hr class="sidebar-divider">-->
+
+        <!--    &lt;!&ndash; Sidebar Toggler (Sidebar) &ndash;&gt;-->
+        <!--    <div class="text-center d-none d-md-inline">-->
+        <!--      <button class="rounded-circle border-0" id="sidebarToggle"></button>-->
+        <!--    </div>-->
+        <!--  </ul>-->
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <!--      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">-->
+
+                <!-- Sidebar Toggle (Topbar) -->
+
+
+                <header th:replace="fragments/header::header"></header>
+                <!--        <ul class="navbar-nav ml-auto">-->
+
+                <!--          &lt;!&ndash; Nav Item - Search Dropdown (Visible Only XS) &ndash;&gt;-->
+                <!--          <li class="nav-item dropdown no-arrow d-sm-none">-->
+                <!--            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"-->
+                <!--               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                <!--              <i class="fas fa-search fa-fw"></i>-->
+                <!--            </a>-->
+                <!--            &lt;!&ndash; Dropdown - Messages &ndash;&gt;-->
+                <!--            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated&#45;&#45;grow-in"-->
+                <!--                 aria-labelledby="searchDropdown">-->
+                <!--              <form class="form-inline mr-auto w-100 navbar-search">-->
+                <!--                <div class="input-group">-->
+                <!--                  <input type="text" class="form-control bg-light border-0 small"-->
+                <!--                         placeholder="Search for..." aria-label="Search"-->
+                <!--                         aria-describedby="basic-addon2">-->
+                <!--                  <div class="input-group-append">-->
+                <!--                    <button class="btn btn-primary" type="button">-->
+                <!--                      <i class="fas fa-search fa-sm"></i>-->
+                <!--                    </button>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <!--              </form>-->
+                <!--            </div>-->
+                <!--          </li>-->
+
+                <!--          &lt;!&ndash; Nav Item - Alerts &ndash;&gt;-->
+                <!--          <li class="nav-item dropdown no-arrow mx-1">-->
+                <!--            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"-->
+                <!--               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                <!--              <i class="fas fa-bell fa-fw"></i>-->
+                <!--              &lt;!&ndash; Counter - Alerts &ndash;&gt;-->
+                <!--              <span class="badge badge-danger badge-counter">3+</span>-->
+                <!--            </a>-->
+                <!--            &lt;!&ndash; Dropdown - Alerts &ndash;&gt;-->
+                <!--            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+                <!--                 aria-labelledby="alertsDropdown">-->
+                <!--              <h4 class="dropdown-header">-->
+                <!--                알림-->
+                <!--              </h4>-->
+                <!--              <a class="dropdown-item d-flex align-items-center" href="#">-->
+                <!--                <div class="mr-3">-->
+                <!--                  <div class="icon-circle bg-warning">-->
+                <!--                    <i class="fas fa-exclamation-triangle text-white"></i>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <div class="small text-gray-500">23/07/05 13:49:07</div>-->
+                <!--                  제보게시판에 새로운 제보가 등록되었습니다.-->
+                <!--                </div>-->
+                <!--              </a>-->
+                <!--              <a class="dropdown-item d-flex align-items-center" href="#">-->
+                <!--                <div class="mr-3">-->
+                <!--                  <div class="icon-circle bg-warning">-->
+                <!--                    <i class="fas fa-exclamation-triangle text-white"></i>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <div class="small text-gray-500">23/07/05 11:23:45</div>-->
+                <!--                  제보게시판에 새로운 제보가 등록되었습니다.-->
+                <!--                </div>-->
+                <!--              </a>-->
+                <!--              <a class="dropdown-item d-flex align-items-center" href="#">-->
+                <!--                <div class="mr-3">-->
+                <!--                  <div class="icon-circle bg-warning">-->
+                <!--                    <i class="fas fa-exclamation-triangle text-white"></i>-->
+                <!--                  </div>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <div class="small text-gray-500">23/07/02 21:34:11</div>-->
+                <!--                  제보게시판에 새로운 제보가 등록되었습니다.-->
+                <!--                </div>-->
+                <!--              </a>-->
+                <!--              <a class="dropdown-item text-center small text-gray-500" href="#">알림 펼치기</a>-->
+                <!--            </div>-->
+                <!--          </li>-->
+
+                <!--          &lt;!&ndash; Nav Item - User Information &ndash;&gt;-->
+                <!--          <li class="nav-item dropdown no-arrow">-->
+                <!--            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"-->
+                <!--               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                <!--              <span class="mr-2 d-none d-lg-inline text-gray-600 small userName">user</span>-->
+                <!--              <img class="img-profile rounded-circle"-->
+                <!--                   src="img/undraw_profile.svg"/>-->
+                <!--            </a>-->
+                <!--            &lt;!&ndash; Dropdown - User Information &ndash;&gt;-->
+                <!--            <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+                <!--                 aria-labelledby="userDropdown" sec:authorize="isAuthenticated()">-->
+                <!--              <a class="dropdown-item" href="setting.html">-->
+                <!--                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>-->
+                <!--                설정-->
+                <!--              </a>-->
+                <!--              <div class="dropdown-divider"></div>-->
+                <!--              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">-->
+                <!--                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>-->
+                <!--                로그아웃-->
+                <!--              </a>-->
+                <!--            </div>-->
+                <!--            <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+                <!--                 aria-labelledby="userDropdown" sec:authorize="isAnonymous()">-->
+                <!--              <a class="dropdown-item" href="login.html">-->
+                <!--                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>-->
+                <!--                로그인-->
+                <!--              </a>-->
+                <!--            </div>-->
+                <!--          </li>-->
+
+                <!--        </ul>-->
+
+                <!--      </nav>-->
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+
+
+
+
+                    <h1 id="building-text" class="h3 mb-4 text-gray-800" style="font-weight: 700;text-align: center">제보하기</h1>
+                    <h3 id="message" class="h5 mb-4 text-gray-500 building-text" style="text-align:center;">위급한 상황을 제보해주세요.</h3>
+                    <form name="loc" action="/posts/new", method="post" onsubmit="return btn();">
+                        <div class="col-md-8 col-xs-10 mb-3 row" style="margin-left: auto; margin-right:auto;">
+                            <table class="table table-bordered" style="table-layout:fixed">
+                                <tr>
+                                    <th scope="row">위치</th>
+                                    <td>
+                                        <div class="col-lg-8 col-xs-10" id="location-button" style="padding-left:0px;">
+                                            <input id="location" name="location" type="text" class="form-control" value="" placeholder="위치를 선택하세요" style="color:#000;background-color:#FFF" readonly>
+                                            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" data-bs-parent="#selector" aria-expanded="false" aria-controls="collapseExample" style="float:right;padding:0" onclick="test();">
+                                                위치 선택
+                                            </button>
+                                        </div>
+                                        <div class="collapse" id="collapseExample" style="margin-top:2%;padding:0">
+                                            <div class="card card-body" style="padding:4%;">
+                                                <div id="collapse-div" style="position:relative;left:0;top:0;">
+                                                    <div style="position:relative;margin-left:auto;margin-right:auto;" id="selector">
+                                                        <!-- Image Map Generated by http://www.image-map.net/ -->
+                                                        <img id="second_floor" class="map" src="img/2floor.png" usemap="#image-map">
+                                                        <map name="image-map">
+                                                            <area target="_self" alt="0,0" title="A0" href="#" coords="181,43,65,160" shape="rect" onmouseover="mapHilight(0,0);" onmouseout="offHilight(0,0);" onclick="chooseLocation('A',0);">
+                                                            <area target="_self" alt="0,1" title="A1" href="#" coords="181,160,298,43" shape="rect" onmouseover="mapHilight(0,1);" onmouseout="offHilight(0,1);"onclick="chooseLocation('A',1);">
+                                                            <area target="_self" alt="0,2" title="A2" href="#" coords="298,43,416,160" shape="rect" onmouseover="mapHilight(0,2);" onmouseout="offHilight(0,2);"onclick="chooseLocation('A',2);">
+                                                            <area target="_self" alt="0,3" title="A3" href="#" coords="416,43,571,160" shape="rect" onmouseover="mapHilight(0,3);" onmouseout="offHilight(0,3);"onclick="chooseLocation('A',3);">
+                                                            <area target="_self" alt="1,0" title="B0" href="#" coords="64,160,181,277" shape="rect" onmouseover="mapHilight(1,0);" onmouseout="offHilight(1,0);"onclick="chooseLocation('B',0);">
+                                                            <area target="_self" alt="1,1" title="B1" href="#" coords="181,159,181,278,219,278,218,197,298,197,298,160,181,160" shape="poly" onmouseover="mapHilight(1,1);" onmouseout="offHilight(1,1);" onclick="chooseLocation('B',1);">
+                                                            <area target="_self" alt="1,2" title="B2" href="#" coords="298,160,416,197" shape="rect" onmouseover="mapHilight(1,2);" onmouseout="offHilight(1,2);"onclick="chooseLocation('B',2);">
+                                                            <area target="_self" alt="1,3" title="B3" href="#" coords="416,161,571,277" shape="rect" onmouseover="mapHilight(1,3);" onmouseout="offHilight(1,3);"onclick="chooseLocation('B',3);">
+                                                            <area target="_self" alt="2,0" title="C0" href="#" coords="64,278,181,395" shape="rect" onmouseover="mapHilight(2,0);" onmouseout="offHilight(2,0);"onclick="chooseLocation('C',0);">
+                                                            <area target="_self" alt="2,1" title="C1" href="#" coords="181,278,219,394" shape="rect" onmouseover="mapHilight(2,1);" onmouseout="offHilight(2,1);"onclick="chooseLocation('C',1);">
+                                                            <area target="_self" alt="2,2" title="C2" coords="" shape="rect" onclick="chooseLocation('C',2);">
+                                                            <area target="_self" alt="2,3" title="C3" href="#" coords="416,277,571,394" shape="rect" onmouseover="mapHilight(2,3);" onmouseout="offHilight(2,3);"onclick="chooseLocation('C',3);">
+                                                            <area target="_self" alt="3,0" title="D0" href="#" coords="64,395,181,511" shape="rect" onmouseover="mapHilight(3,0);" onmouseout="offHilight(3,0);"onclick="chooseLocation('D',0);">
+                                                            <area target="_self" alt="3,1" title="D1" href="#" coords="181,395,219,511" shape="rect" onmouseover="mapHilight(3,1);" onmouseout="offHilight(3,1);"onclick="chooseLocation('D',1);">
+                                                            <area target="_self" alt="3,2" title="D2" coords="" shape="rect" onclick="chooseLocation('D',2);">
+                                                            <area target="_self" alt="3,3" title="D3" href="#" coords="416,395,571,511" shape="rect" onmouseover="mapHilight(3,3);" onmouseout="offHilight(3,3);"onclick="chooseLocation('D',3);">
+                                                            <area target="_self" alt="4,0" title="E0" href="#" coords="64,511,181,628" shape="rect" onmouseover="mapHilight(4,0);" onmouseout="offHilight(4,0);"onclick="chooseLocation('E',0);">
+                                                            <area target="_self" alt="4,1" title="E1" href="#" coords="219,560,219,512,182,511,182,628,298,628,298,560,269,560" shape="poly" onmouseover="mapHilight(4,1);" onmouseout="offHilight(4,1);"onclick="chooseLocation('E',1);">
+                                                            <area target="_self" alt="4,2" title="E2" href="#" coords="298,560,416,628" shape="rect" onmouseover="mapHilight(4,2);" onmouseout="offHilight(4,2);" onclick="chooseLocation('E',2);">
+                                                            <area target="_self" alt="4,3" title="E3" href="#" coords="416,511,571,628" shape="rect" onmouseover="mapHilight(4,3);" onmouseout="offHilight(4,3);" onclick="chooseLocation('E',3);">
+                                                            <area target="_self" alt="5,0" title="F0" href="#" coords="64,629,181,710" shape="rect" onmouseover="mapHilight(5,0);" onmouseout="offHilight(5,0);" onclick="chooseLocation('F',0);">
+                                                            <area target="_self" alt="5,1" title="F1" href="#" coords="181,628,298,710" shape="rect" onmouseover="mapHilight(5,1);" onmouseout="offHilight(5,1);" onclick="chooseLocation('F',1);">
+                                                            <area target="_self" alt="5,2" title="F2" href="#" coords="298,628,416,710" shape="rect" onmouseover="mapHilight(5,2);" onmouseout="offHilight(5,2);" onclick="chooseLocation('F',2);">
+                                                            <area target="_self" alt="5,3" title="F3" href="#" coords="416,628,571,710" shape="rect" onmouseover="mapHilight(5,3);" onmouseout="offHilight(5,3);" onclick="chooseLocation('F',3);">
+                                                        </map>
+
+                                                        <div>
+                                                            <p style="position:absolute;top:10%; left:5%;">A</p>
+                                                            <p style="position:absolute;top:28%; left:5%;">B</p>
+                                                            <p style="position:absolute;top:43%; left:5%;">C</p>
+                                                            <p style="position:absolute;top:60%; left:5%;">D</p>
+                                                            <p style="position:absolute;top:75%; left:5%;">E</p>
+                                                            <p style="position:absolute;top:91%; left:5%;">F</p>
+                                                            <p style="position:absolute;top:0.5%; left:19%;">0</p>
+                                                            <p style="position:absolute;top:0.5%; left:38%;">1</p>
+                                                            <p style="position:absolute;top:0.5%; left:56%;">2</p>
+                                                            <p style="position:absolute;top:0.5%; left:75%;">3</p>
+                                                        </div>
+                                                    </div>
+                                                    <script>
+                                                        function chooseLocation(x, y){
+                                                            $('input[name=location]').attr('value',x+y.toString());
+                                                            $('input[name=location]').focus();
+                                                            $('.collapse').css('display', 'none');
+                                                        }
+
+                                                        function test(){
+                                                            var con = document.getElementById("collapseExample");
+                                                            if(con.style.display=='none'){
+                                                                con.style.display = 'block';
+                                                            }else{
+                                                                con.style.display = 'none';
+                                                            }
+                                                        }
+
+                                                        function mapHilight(x, y){
+                                                            var loc = x+","+y;
+                                                            var data = {};
+
+                                                             data.fillColor = "4e73df";
+                                                             data.alwaysOn = true;
+                                                             $('area[alt="' + loc + '"]').data('maphilight', data).trigger('alwaysOn.maphilight');
+                                                        }
+
+                                                        function offHilight(x, y){
+                                                            var loc = x+","+y;
+                                                            var data = {};
+                                                            data.alwaysOn = false;
+                                                            $('area[alt="' + loc + '"]').data('maphilight', data).trigger('alwaysOn.maphilight');
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">제목</th>
+                                    <td>
+                                        <div>
+                                            <input name="title" type="text" class="form-control" id="title" placeholder="제목을 입력하세요" style="color:#000">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">내용</th>
+                                    <td>
+                                        <div>
+                                            <textarea name="content" class="form-control" id="report-content" rows="10" placeholder="내용을 입력하세요" style="color:#000"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+<!--                            <label class="col-sm-3 col-form-label" style="text-align:right">위치</label>-->
+<!--                            <div class="col-sm-2">-->
+<!--                                <select name="location" class="form-select" aria-label="Default select example" style="margin-bottom: 10px">-->
+<!--                                    <option selected value="">위치</option>-->
+<!--                                    <option value="6202강의실">6202강의실</option>-->
+<!--                                    <option value="6203강의실">6203강의실</option>-->
+<!--                                    <option value="6208강의실">6208강의실</option>-->
+<!--                                    <option value="6210강의실">6210강의실</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-10" style="margin-left: auto; margin-right: auto;">-->
+<!--                            <div class="mb-3 row">-->
+<!--                                <label class="col-sm-3 col-form-label" style="text-align:right">제목</label>-->
+<!--                                <div class="col-sm-9">-->
+<!--                                    <input name="title" type="text" class="form-control col-sm-10" id="title" placeholder="제목을 입력하세요">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="mb-3 row">-->
+<!--                                <label class="col-sm-3 col-form-label" style="text-align:right; height:38px;">제보 내용</label>-->
+<!--                                <div class="col-sm-9">-->
+<!--                                    <textarea name="content" class="form-control col-sm-10" rows="10" placeholder="내용을 입력하세요"></textarea>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                            <button id="submit" class="btn btn-secondary float-right col-sm-12">제출</button>
+<!--                            <div class="col-sm-12">-->
+<!--                                <button class="btn btn-secondary float-right">제출</button>-->
+<!--                            </div>-->
+                        </div>
+
+                        <!--                    <button type="submit" class="btn btn-secondary btn-sm col-sm-2 float-right" onclick="javascript:btn()">제출</button>-->
+
+                    </form>
+
+
+                </div>
+                <div id="g_toast" th:insert="~{fragments/warningAlert :: warning}"></div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer th:replace="fragments/footer::footer"></footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h6>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">취소</button>
+                    <a class="btn btn-primary btn-sm" href="/logout">로그아웃</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+    <script src="vendor/jquery/jquery.imageMapResizer.min.js"></script>
+    <script src="vendor/jquery/jquery.maphilight.min.js"></script>
+
+    <th:block th:replace="fragments/script::script"></th:block>
+    <script>
+        var resizeEvt;
+
+        (function($) {
+            $(document).on('click', function(){
+                $('img[usemap]').rwdImageMaps();
+                $('img[usemap]').maphilight();
+                $('[data-toggle="tooltip"]').tooltip();
+                $('map').imageMapResize();
+            });
+
+            $(window).on('resize.usemaps', function(){
+                clearTimeout(resizeEvt);
+                resizeEvt = setTimeout(function(){
+                    $('img[usemap]').maphilight();
+                    //$('[data-toggle="tooltip"]').tooltip();
+                    $('map').imageMapResize();
+                }, 200);
+            });
+
+        })(jQuery);
+    </script>
+<!--    <script type="text/javascript">-->
+<!--        $(function(){-->
+<!--            $('img[usemap]').rwdImageMaps();-->
+<!--            $('img[usemap]').maphilight();-->
+<!--            //$('[data-toggle="tooltip"]').tooltip();-->
+<!--            $('map').imageMapResize();-->
+<!--        });-->
+<!--    </script>-->
+
+    <script>
+        $.fn.maphilight.defaults = {
+            fill: true,
+            fillOpacity:0.2,
+            fillColor:"4e73df",
+            stroke: true,
+            strokeColor:"4e73df",
+            strokeOpacity:1
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('[data-rel=popover]').popover({
+              html: true,
+              trigger: "hover"
+            });
+        })
+    </script>
+
+    <script>
+    function btn(){
+        if(loc.location.value == ""){
+            Swal.fire('위치를 선택해주세요');
+            loc.location.focus();
+            return false;
+        }
+
+        if(loc.title.value == ""){
+            Swal.fire('제목을 입력해주세요');
+            loc.title.focus();
+            return false;
+        }
+        return true;
+    }
+    </script>
+
+
+</body>
+
+</html>
