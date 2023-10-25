@@ -95,7 +95,9 @@
 
 - **localization-fingerprint-master**
 	
-	- Python 3.7 이상	
+	- Python 3.7 이상
+
+	- 클라이언트의 경우 리눅스 기반의 OS
 
 - **yolov5-master**
 
