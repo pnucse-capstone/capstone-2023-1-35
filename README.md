@@ -142,9 +142,9 @@
 
 - **웹서비스만 확인할 경우**
 
-	- density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
-
-	- http://localhost:8080 으로 접속합니다.
+	a. density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
+	
+	b. http://localhost:8080으로 접속합니다.
 
 	(혹은 http://ec2-43-202-149-63.ap-northeast-2.compute.amazonaws.com:8080/ 에 접속하시면 테스트 데이터로 동작하는 모습을 확인할 수 있습니다.)
 
