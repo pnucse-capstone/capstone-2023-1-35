@@ -146,9 +146,9 @@
 
 - **웹서비스만 확인할 경우**
 
-	1. density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
+	- density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
 
-	2. http://localhost:8080으로 접속합니다.
+	- http://localhost:8080으로 접속합니다.
 
 	<br>
 
