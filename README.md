@@ -97,8 +97,6 @@
 	
 	- Python 3.7 이상	
 
-<br>
-
 - **yolov5-master**
 
 	- Python 3.11 이상
@@ -132,8 +130,6 @@
 		// 요구사항 다운로드
 		```
 
-<br>
-
 - **density_check_web_service**
 	
 	- Spring Boot 2.7.11 
@@ -148,17 +144,17 @@
 
 	- density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
 
-	- http://localhost:8080으로 접속합니다.
-
-	<br>
+	- http://localhost:8080 으로 접속합니다.
 
 	(혹은 http://ec2-43-202-149-63.ap-northeast-2.compute.amazonaws.com:8080/ 에 접속하시면 테스트 데이터로 동작하는 모습을 확인할 수 있습니다.)
 
 <br>
 
-- **전체 확인**
+- **전체 동작 확인**
 
 	<U>density_check_web_service의 실행이 yolov5-master와 localization-fingerprint-master보다 선행되어야 합니다.</U>
+
+	<U>또한 현재 프로젝트의 모든 IP 주소는 localhost로 변경되어있습니다. 로컬 환경에서 모든 프로젝트 구동 시에는 IP 주소를 입력/변경하지 않아도 됩니다.</U>
 
 	- density_check_web_service
 
@@ -223,5 +219,4 @@
 
 		11. 클라이언트의 위치를 서버가 실시간으로 추정하여 그 결과를 웹 서버로 전송합니다.
 
-		<br>
 		(만약 6공학관 2층에서 사용한다면 8번부터 실행해도 정상적으로 동작합니다.)
