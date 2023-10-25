@@ -143,7 +143,7 @@
 - **웹서비스만 확인할 경우**
 
 	a. density_check_web_service폴더의 density_check_web_service-0.0.1-SNAPSHOT.jar를 실행합니다.
-	
+
 	b. http://localhost:8080으로 접속합니다.
 
 	(혹은 http://ec2-43-202-149-63.ap-northeast-2.compute.amazonaws.com:8080/ 에 접속하시면 테스트 데이터로 동작하는 모습을 확인할 수 있습니다.)
@@ -154,7 +154,7 @@
 
 	<U>density_check_web_service의 실행이 yolov5-master와 localization-fingerprint-master보다 선행되어야 합니다.</U>
 
-	<U>또한 현재 프로젝트의 모든 IP 주소는 localhost로 변경되어있습니다. 로컬 환경에서 모든 프로젝트 구동 시에는 IP 주소를 입력/변경하지 않아도 됩니다.</U>
+	<U>또한 현재 프로젝트의 모든 IP 주소는 localhost로 변경되어 있습니다. 로컬 환경에서 모든 프로젝트 구동 시에는 IP 주소를 입력/변경하지 않아도 됩니다.</U>
 
 	- density_check_web_service
 
