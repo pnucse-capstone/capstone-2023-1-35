@@ -163,7 +163,13 @@
 
 		1. density_check_web_service\src\main\resources\static\camera-location.html의 539번째 Line의 arr변수에 yolov5-master 프로젝트를 실행하는 환경의 IP주소 + :5000을 카메라 위치와 번호에 맞게 배열에 입력합니다.
 	
-		2. 프로젝트를 실행합니다.
+		2. 프로젝트를 빌드 및 실행합니다.
+			
+			```bash
+			cd density_check_web_service
+			./gradlew build
+			java -jar ./build/libs/density_check_web_service-0.0.1-SNAPSHOT.jar
+			```
 		
 		3. 실행 후 로그인 -> 관리자 페이지 -> 회원 관리 페이지(/user_management)에 접속하여 현재 소지한 라즈베리파이(3.의 클라이언트) MAC 주소를 찾아 로그인한 아이디를 등록합니다.
 
@@ -178,48 +184,98 @@
 		4. detect.py의 204번째 Line의 center 변수와 311번째 Line의 source_coord 변수에 카메라 설치 위치에 맞는 좌표를 입력합니다.
 		
 		5. detect.py를 실행합니다.
+
+			```bash
+			python3 detect.py
+			```
 		
 		6. app.py를 실행합니다.
 
+			```bash
+			python3 app.py
+			```
+
 	- localization-fingerprint-master
 
-		1. 공통 설정 : common.py 파일을 열어서 서버 ip, 서버 port 번호, 폴더 등등을 설정합니다.
+		1. 공통 설정
+		
+			- common.py 파일을 열어서 서버 ip, 서버 port 번호, 폴더 등등을 설정합니다.
+
+		2. 라디오 맵 생성을 위한 데이터 수집
   	
-		2. 클라이언트 : rpi 폴더에서 measure-1 폴더 내부의 모든 파일을 삭제하고, measure-realtime-1 폴더 내부의 모든 파일을 삭제합니다.
-  		
-		3. 서버 : server 폴더에서 measure-1 폴더 내부의 모든 파일을 삭제하고, measure-outcome-1 폴더 내부의 모든 파일을 삭제합니다.
-		
-		4. 서버: server 폴더에서 2-server-main.py의 144번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/sendLocations로 수정합니다.
+			- 클라이언트 : rpi 폴더에서 measure-1 폴더 내부의 모든 파일을 삭제하고, measure-realtime-1 폴더 내부의 모든 파일을 삭제합니다.
+			
+			- 서버 : server 폴더에서 measure-1 폴더 내부의 모든 파일을 삭제하고, measure-outcome-1 폴더 내부의 모든 파일을 삭제합니다.
+			
+			- 서버: server 폴더에서 2-server-main.py의 144번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/sendLocations로 수정합니다.
 
-		5. 클라이언트(RPi) : 1-client-setup.py x y n 을 각 cell-block에서 실행합니다.
-  		
-				- (x,y) cell-block의 인덱스 (물리적인 실제 좌표 아님)
-				- n = 동일한 cell-block에서 몇번 반복해서 측정을 할지 (기본값 = 5)
-				- measure-1 이라는 폴더가 생성되어 있어야 하고, 폴더안에는 아무런 파일이 없어야 함
-				- 프로그램 구동 후, measure-1 폴더 내에 많은 파일이 생성되어 있음
+			- 클라이언트(RPi) : 1-client-setup.py x y n 을 각 cell-block에서 실행합니다.
 
-		6. 서버 : 1-receive-setup.py를 실행합니다.
+				```bash
+				cd rpi
 
-				- RPi 클라이언트가 보내주는 radio measurement 파일을 수신하는 코드
-				- USE_INTERNET_CONN=True 이면 실제로 클라이언트로부터 전송받은 데이터로 radio map 만들고 False 이면, 서버 로컬에 저장된 데이터를 이용해서 radio map 만듦
-				- 서버쪽에는 measure-outcome-1 이라는 폴더가 만들어져 있어야 함
+				// 예시
+				python3 1-client-setup.py 0 0 10
+				python3 1-client-setup.py 0 1 10
+				python3 1-client-setup.py 1 0 10
+				.
+				.
+				.
+				```
+			
+				(x,y) cell-block의 인덱스 (물리적인 실제 좌표 아님)
+				
+				n = 동일한 cell-block에서 몇번 반복해서 측정을 할지 (기본값 = 5)
+				
+				measure-1 이라는 폴더가 생성되어 있어야 하고, 폴더안에는 아무런 파일이 없어야 함
+				
+				프로그램 구동 후, measure-1 폴더 내에 많은 파일이 생성되어 있음
 
-		7. 클라이언트(rpi) : 2-upload-setup.py를 실행합니다.
+			- 서버 : 1-receive-setup.py를 실행합니다.
 
-				- 서버쪽 1-receive-setup.py가 먼저 구동하고 있는 상태에서 구동해야 함
-				- 클라이언트의 measure-1 폴더 내의 파일을 서버에게 전달 해 주는 코드
+				```bash
+				cd server
+				python3 1-receive-setup.py
+				```
 
-		8. 서버 : 2-server-main.py의 146번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/sendLocations로 수정합니다.
-		
-		9. 서버: 2-server-main.py를 실행합니다.
+				RPi 클라이언트가 보내주는 radio measurement 파일을 수신하는 코드
+				
+				USE_INTERNET_CONN=True 이면 실제로 클라이언트로부터 전송받은 데이터로 radio map 만들고 False 이면, 서버 로컬에 저장된 데이터를 이용해서 radio map 만듦
+				
+				서버쪽에는 measure-outcome-1 이라는 폴더가 만들어져 있어야 함
 
-  				- 실시간 위치 추적 결과를 (y,x) 형태로 출력함
+			- 클라이언트(rpi) : 2-upload-setup.py를 실행합니다.
 
-		10. 클라이언트(rpi) : 3-client-main.py 실행합니다.
-  			
-				- 서버 2-server-main.py를 먼저 실행하고, 다음으로 이 코드를 실행
-				- 실시간으로 rss 값을 측정하고, 그 결과를 서버 2-server-main.py로 보내줌
+				```bash
+				python3 2-upload-setup.py
+				```
 
-		11. 클라이언트의 위치를 서버가 실시간으로 추정하여 그 결과를 웹 서버로 전송합니다.
+				서버쪽 1-receive-setup.py가 먼저 구동하고 있는 상태에서 구동해야 함
+				
+				클라이언트의 measure-1 폴더 내의 파일을 서버에게 전달 해 주는 코드
 
-		(만약 6공학관 2층에서 사용한다면 8번부터 실행해도 정상적으로 동작합니다.)
+		3. 위치 추정
+
+			- 서버 : 2-server-main.py의 146번째 Line의 주소를 density_check_web_service를 실행하는 환경의 IP주소 + :8080/sendLocations로 수정합니다.
+			
+			- 서버: 2-server-main.py를 실행합니다.
+
+				```bash
+				python3 2-server-main.py
+				```
+
+				실시간 위치 추적 결과를 (y,x) 형태로 출력함
+
+			- 클라이언트(rpi) : 3-client-main.py 실행합니다.
+
+				```bash
+				python3 3-client-main.py
+				```
+				
+				서버 2-server-main.py를 먼저 실행하고, 다음으로 이 코드를 실행
+				
+				실시간으로 rss 값을 측정하고, 그 결과를 서버 2-server-main.py로 보내줌
+
+			- 클라이언트의 위치를 서버가 실시간으로 추정하여 그 결과를 웹 서버로 전송합니다.
+
+		(만약 6공학관 2층에서 사용한다면 위치추정부터 실행해도 정상적으로 동작합니다.)
