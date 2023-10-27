@@ -84,7 +84,8 @@
 
 **[시연 영상]**
 
-추가 예정
+[![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/yn6vRykNeKs/0.jpg)](https://youtu.be/yn6vRykNeKs?feature=shared)
+
 
 <!-- [![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg)](https://www.youtube.com/watch?v=zh_gQ_lmLqE) --> 
 
