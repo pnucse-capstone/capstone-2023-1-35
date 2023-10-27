@@ -214,6 +214,9 @@
 				```bash
 				cd rpi
 
+				// 폴더 생성
+				mkdir measure-1
+
 				// 예시
 				python3 1-client-setup.py 0 0 10
 				python3 1-client-setup.py 0 1 10
@@ -235,6 +238,10 @@
 
 				```bash
 				cd server
+				
+				// 폴더 생성
+				mkdir measure-outcome-1
+
 				python3 1-receive-setup.py
 				```
 
