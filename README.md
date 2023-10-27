@@ -127,10 +127,9 @@
 		설치방법: 
 		```bash
 		cd yolov5-master
-		// yolov5-master로 이동
 
-		pip install -r requirements.txt
 		// 요구사항 다운로드
+		pip install -r requirements.txt
 		```
 
 - **density_check_web_service**
